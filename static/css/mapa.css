@@ -3,7 +3,7 @@
     width: 100%;
   }
   
-  .ol-popup {
+  .ol-popup, .ol-popup-filter {
       position: absolute;
       display: flex; 
       -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
@@ -18,7 +18,23 @@
       
     }
 
-    .ol-popup-content{
+    .ol-popup-filter, .ol-popup-content-filter {
+     z-index: 1;
+     width: 25em;
+     height: 280px;
+     margin-left: 4em;
+      
+    }
+
+    .ol-popup-content-filter h2{
+      color: #ffff;
+      font-size: 30px;
+      
+    }
+
+    
+
+    .ol-popup-content, .ol-popup-content-filter{
 
       width: 30em;
       height: 300px;
@@ -52,4 +68,14 @@
         color: #ffff;
     }
   
-    
+    .filter{
+      z-index: 1;
+      position: relative;
+      left: 20px;
+      top: 200px;
+    }
+
+    .filter h2{
+      color: #020202;
+      background-color: #0000;
+    }
