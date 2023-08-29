@@ -98,42 +98,15 @@ map.on('click', function (e) {
 });
 
 
-const sector = document.getElementById("selectSector");
-    const organismo = document.getElementById("selectOrganismo");
-    const estado = document.getElementById("selectEstado");
+  
     const boton = document.getElementById("miBoton");
   
-    $(document).ready(function() {
-      $('#selectSector').change(function(){
-          valor = $(this).val();
-         
-          returnFilter(valor)
-      });
-      $('#selectOrganismo').change(function(){
-          valor = $(this).val();
-          console.log(valor);
-          returnFilter(valor)
-      });
-      $('#selectEstad').change(function(){
-          valor = $(this).val();
-          // console.log(valor);
-          returnFilter(valor)
-      });
-      $('#selectPartido').change(function(){
-          valor = $(this).val();
-          // console.log(valor);
-          returnFilter(valor)
-      });
-    })
 
-    function returnFilter(filter)
-    {
+    if (filtros_ubicacion.length > 0){
       
-     
-      coordenadas.forEach(coordenada => 
+      filtros_ubicacion.forEach(coordenada => 
       {
-        if(filter == coordenada.sector)
-        {
+          
           ultimaCapa.getSource().clear()
           console.log(coordenada.longitud, coordenada.latitud)
           let marcador = new ol.Feature({
@@ -144,17 +117,12 @@ const sector = document.getElementById("selectSector");
           });
           marcador.setId(coordenada.id);
           marcador.setStyle(new ol.style.Style({
-            image: new ol.style.Circle({
-            radius: 9,
-            fill: new ol.style.Fill({color: 'black'})
-            })
+            image: new ol.style.Icon({
+                src: '/static/obra.png',
+                scale: 0.2,
+          })
           }));
           filtros.push(marcador);
-
-        
-        }
-      
-          
         
       });
 
@@ -165,6 +133,10 @@ const sector = document.getElementById("selectSector");
       })
       
       
-      map.addLayer(ultimaCapa) 
-  }
+      map.addLayer(ultimaCapa)
+    }else{
+      console.log("VACIO")
+    }
+    
+    
     

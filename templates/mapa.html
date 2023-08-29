@@ -12,48 +12,53 @@
       <div id="popup-filter" class="ol-popup-filter">
         
         <div id="filter-content" class="ol-popup-content-filter">
-         
+         <form method="post">
+          {% csrf_token %}
 
-            <select class="select-filter" name="selectSector" id="selectSector">
+          <select class="select-filter" name="selectSector" id="selectSector">
 
-              <option selected>Sector</option>
-              {% for s in sector  %}
-              <option value="{{s.id}}">{{s.nombre_sector}}</option>
-              {% endfor %}
-              
-             
-            </select>
-    
-            <select class="select-filter" name="selectLocalidad" id="selectLocalidad">
+            <option value='0' selected>Sector</option>
+            {% for s in sector  %}
+            <option value="{{s.id}}">{{s.nombre_sector}}</option>
+            {% endfor %}
+            
+           
+          </select>
   
-              <option selected>Localidad</option>
-              {% for l in localidad  %}
-              <option value="{{l.id}}">{{l.nombre_localidad}}</option>
-              {% endfor %}
-              
-            </select>
-    
-            <select class="select-filter" name="selectEstado" id="selectEstado">
+          <select class="select-filter" name="selectLocalidad" id="selectLocalidad">
+
+            <option value='0' selected>Localidad</option>
+            {% for l in localidad  %}
+            <option value="{{l.id}}">{{l.nombre_localidad}}</option>
+            {% endfor %}
+            
+          </select>
   
-              <option selected>Estado de Obra</option>
-              {% for e in estado  %}
-              <option value="{{e.id}}">{{e.estado}}</option>
-              {% endfor %}
-              
-              
-            </select>
-    
-            <select class="select-filter" name="selectOrganismo" id="selectOrganismo">
+          <select class="select-filter" name="selectEstado" id="selectEstado">
+
+            <option value='0'  selected>Estado de Obra</option>
+            {% for e in estado  %}
+            <option value="{{e.id}}">{{e.estado}}</option>
+            {% endfor %}
+            
+            
+          </select>
   
-              <option selected>Organismo Financiador</option>
-              {% for o in organismo  %}
-              <option value="{{o.id}}">{{o.nombre}}</option>
-              {% endfor %}
-              
-             
-            </select>
-  
-            <button type="submit">enviar</button>
+          <select class="select-filter" name="selectOrganismo" id="selectOrganismo">
+
+            <option value='0'  selected>Organismo Financiador</option>
+            {% for o in organismo  %}
+            <option value="{{o.id}}">{{o.nombre}}</option>
+            {% endfor %}
+            
+           
+          </select>
+
+          <button type="submit" id="miBoton" >enviar</button>
+
+         </form>
+
+            
 
           
            
@@ -116,6 +121,56 @@
         {% endfor %}       
     
     ]
+
+    filtros_ubicacion = 
+    [
+      {% for filtro in data  %}
+       {
+        'id': {{filtro.id}},
+        'longitud':{{filtro.longitud}}, 
+        'latitud':{{filtro.latitud}},
+      
+       },
+      
+      {% endfor %}
+    ]
+    
+    if (filtros_ubicacion.length > 0){
+      console.log("LLAMADA AL BOTON")
+      filtros_ubicacion.forEach(coordenada => 
+      {
+        
+          ultimaCapa.getSource().clear()
+          console.log(coordenada.longitud, coordenada.latitud)
+          let marcador = new ol.Feature({
+            id: coordenada.id,
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([coordenada.longitud, coordenada.latitud])
+            ),
+          });
+          marcador.setId(coordenada.id);
+          marcador.setStyle(new ol.style.Style({
+            image: new ol.style.Circle({
+            radius: 9,
+            fill: new ol.style.Fill({color: 'black'})
+            })
+          }));
+          filtros.push(marcador);
+        
+      });
+
+      ultimaCapa = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          features: filtros, 
+        }),
+      })
+      
+      
+      map.addLayer(ultimaCapa)
+    }
+     
+ 
+  
     
   </script>
 

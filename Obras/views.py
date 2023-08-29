@@ -26,7 +26,34 @@ class ObrasTemplateView(TemplateView):
     
         return context 
 
+    def post(self, request, *args, **kwargs):
+        sector = request.POST.get('selectSector')
+        organismo = request.POST.get('selectOrganismo')
+        estado = request.POST.get('selectEstado')
+        localidad = request.POST.get('selectLocalidad')
         
+        data = Obras.objects.all()
+        if (organismo != '0'): 
+            data = data.filter(organismo_financiador_id = organismo)
+        if (sector != '0'): 
+            data = data.filter(sector_id = sector)
+            
+        if (estado != '0'): 
+            data = data.filter(estado_obra_id = estado)
+           
+        if (localidad != '0'): 
+            data = data.filter(localidad_id = localidad)
+
+        
+        context = self.get_context_data()
+        context['data'] = data
+        print("*********** DATA FINAL************")
+        print(context['data'])
+        print("*********** DATA FINAL************")
+       
+        
+        
+        return render(request, self.template_name, context)
     
         
      
