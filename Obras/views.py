@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.forms import ModelForm
 from django.views.generic import CreateView, TemplateView
 from Obras.models import Obras
 from SectorObra.models import Sector
@@ -20,8 +21,12 @@ class ObrasTemplateView(TemplateView):
         context['localidad'] = Localidad.objects.all()
         context['organismo'] = Organismo.objects.all()
         context['sector'] = Sector.objects.all()
+
+        
     
         return context 
+
+        
     
         
      

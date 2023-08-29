@@ -20,4 +20,5 @@ from Obras.views import ObrasTemplateView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('mapa/', ObrasTemplateView.as_view(), name = "mapa")
+    
 ]

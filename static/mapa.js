@@ -36,7 +36,8 @@ closer.onclick = function() {
 };
 
 console.log(datos_obra)
-const marcadores = []; 
+const marcadores = [];
+const filtros = []; 
 coordenadas.forEach(coordenada => {
         
         let marcador = new ol.Feature({
@@ -55,7 +56,7 @@ coordenadas.forEach(coordenada => {
         marcadores.push(marcador);
     });
 
-    let ultimaCapa = new ol.layer.Vector({
+    var ultimaCapa = new ol.layer.Vector({
       source: new ol.source.Vector({
         features: marcadores, 
     }),
@@ -97,26 +98,73 @@ map.on('click', function (e) {
 });
 
 
-//FILTROS
-$(document).ready(function() {
-    $('#selectSector').change(function(){
-        valor = $(this).val();
-        console.log(valor);
-       
-    });
-    $('#selectLocalidad').change(function(){
-        valor = $(this).val();
-        console.log(valor);
-       
-    });
-    $('#selectEstado').change(function(){
-        valor = $(this).val();
-        console.log(valor);
+const sector = document.getElementById("selectSector");
+    const organismo = document.getElementById("selectOrganismo");
+    const estado = document.getElementById("selectEstado");
+    const boton = document.getElementById("miBoton");
+  
+    $(document).ready(function() {
+      $('#selectSector').change(function(){
+          valor = $(this).val();
+         
+          returnFilter(valor)
+      });
+      $('#selectOrganismo').change(function(){
+          valor = $(this).val();
+          console.log(valor);
+          returnFilter(valor)
+      });
+      $('#selectEstad').change(function(){
+          valor = $(this).val();
+          // console.log(valor);
+          returnFilter(valor)
+      });
+      $('#selectPartido').change(function(){
+          valor = $(this).val();
+          // console.log(valor);
+          returnFilter(valor)
+      });
+    })
+
+    function returnFilter(filter)
+    {
+      
+     
+      coordenadas.forEach(coordenada => 
+      {
+        if(filter == coordenada.sector)
+        {
+          ultimaCapa.getSource().clear()
+          console.log(coordenada.longitud, coordenada.latitud)
+          let marcador = new ol.Feature({
+            id: coordenada.id,
+            geometry: new ol.geom.Point(
+                ol.proj.fromLonLat([coordenada.longitud, coordenada.latitud])
+            ),
+          });
+          marcador.setId(coordenada.id);
+          marcador.setStyle(new ol.style.Style({
+            image: new ol.style.Circle({
+            radius: 9,
+            fill: new ol.style.Fill({color: 'black'})
+            })
+          }));
+          filtros.push(marcador);
+
         
-    });
-    $('#selectOrganismo').change(function(){
-        valor = $(this).val();
-        console.log(valor);
+        }
+      
+          
         
-    });
-})
+      });
+
+      ultimaCapa = new ol.layer.Vector({
+        source: new ol.source.Vector({
+          features: filtros, 
+        }),
+      })
+      
+      
+      map.addLayer(ultimaCapa) 
+  }
+    

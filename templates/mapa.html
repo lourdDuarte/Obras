@@ -13,46 +13,52 @@
         
         <div id="filter-content" class="ol-popup-content-filter">
          
-          <select class="select-filter" id="selectSector">
 
-            <option selected>Sector</option>
-            {% for s in sector  %}
-            <option value="{{s.id}}">{{s.nombre_sector}}</option>
-            {% endfor %}
-            
+            <select class="select-filter" name="selectSector" id="selectSector">
+
+              <option selected>Sector</option>
+              {% for s in sector  %}
+              <option value="{{s.id}}">{{s.nombre_sector}}</option>
+              {% endfor %}
+              
+             
+            </select>
+    
+            <select class="select-filter" name="selectLocalidad" id="selectLocalidad">
+  
+              <option selected>Localidad</option>
+              {% for l in localidad  %}
+              <option value="{{l.id}}">{{l.nombre_localidad}}</option>
+              {% endfor %}
+              
+            </select>
+    
+            <select class="select-filter" name="selectEstado" id="selectEstado">
+  
+              <option selected>Estado de Obra</option>
+              {% for e in estado  %}
+              <option value="{{e.id}}">{{e.estado}}</option>
+              {% endfor %}
+              
+              
+            </select>
+    
+            <select class="select-filter" name="selectOrganismo" id="selectOrganismo">
+  
+              <option selected>Organismo Financiador</option>
+              {% for o in organismo  %}
+              <option value="{{o.id}}">{{o.nombre}}</option>
+              {% endfor %}
+              
+             
+            </select>
+  
+            <button type="submit">enviar</button>
+
+          
            
-          </select>
-  
-          <select class="select-filter" id="selectLocalidad">
-
-            <option selected>Localidad</option>
-            {% for l in localidad  %}
-            <option value="{{l.id}}">{{l.nombre_localidad}}</option>
-            {% endfor %}
-            
-          </select>
-  
-          <select class="select-filter" id="selectEstado">
-
-            <option selected>Estado de Obra</option>
-            {% for e in estado  %}
-            <option value="{{e.id}}">{{e.estado}}</option>
-            {% endfor %}
-            
-            
-          </select>
-  
-          <select class="select-filter" id="selectOrganismo">
-
-            <option selected>Organismo Financiador</option>
-            {% for o in organismo  %}
-            <option value="{{o.id}}">{{o.nombre}}</option>
-            {% endfor %}
-            
-           
-          </select>
-
-      
+          
+          
         </div>
         
       </div>
@@ -83,6 +89,9 @@
         [
             {% for ubi in ubicacion %}
                 {
+                    'sector':{{ubi.sector_id}},
+                    'organismo': {{ubi.organismo_financiador_id}},
+                    'estado': {{ubi.estado_obra_id}},
                     'id': {{ubi.id}},
                     'longitud':{{ubi.longitud}}, 
                     'latitud':{{ubi.latitud}}
@@ -107,8 +116,7 @@
         {% endfor %}       
     
     ]
-
-
+    
   </script>
 
 {% endblock container %}  
