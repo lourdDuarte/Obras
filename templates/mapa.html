@@ -12,7 +12,9 @@
       <div id="popup-filter" class="ol-popup-filter">
         
         <div id="filter-content" class="ol-popup-content-filter">
-         <form method="post">
+        <button type="submit" class="ClearButton" id="buttonFilter"><i class="fa-solid fa-delete-left"></i></button>
+        <p id="dato-encontrado">Se encontraron datos <i class="fa-solid fa-check"></i></p> 
+        <form method="post">
           {% csrf_token %}
 
           <select class="select-filter" name="selectSector" id="selectSector">
@@ -54,10 +56,11 @@
            
           </select>
 
-          <button type="submit" id="miBoton" >enviar</button>
+          <button type="submit" class="miButton" >Filtrar</button>
+          
 
          </form>
-
+         
             
 
           
@@ -87,6 +90,7 @@
       </div>
     </div>
   </div>
+  
   <script>
 
   //DATOS
@@ -94,9 +98,7 @@
         [
             {% for ubi in ubicacion %}
                 {
-                    'sector':{{ubi.sector_id}},
-                    'organismo': {{ubi.organismo_financiador_id}},
-                    'estado': {{ubi.estado_obra_id}},
+
                     'id': {{ubi.id}},
                     'longitud':{{ubi.longitud}}, 
                     'latitud':{{ubi.latitud}}
@@ -105,6 +107,8 @@
                 },
             {% endfor %}
         ]
+    
+  console.log(coordenadas)
 
     datos_obra =
     [
@@ -115,7 +119,9 @@
                 'latitud':{{ubi.latitud}},
                 'nombre':'{{ubi.nombre}}',
                 'valor':'{{ubi.valor}}',
-                'localidad': '{{ubi.localidad}}'
+                'localidad': '{{ubi.localidad}}',
+                'descripcion': '{{ubi.descripcion}}',
+                
             },
             
         {% endfor %}       
@@ -134,43 +140,12 @@
       
       {% endfor %}
     ]
+    var buttonFilter = document.getElementById('buttonFilter');
+    buttonFilter.addEventListener("click", function() {
+      
+      location.href="{% url 'mapa'  %}"
+    });
     
-    if (filtros_ubicacion.length > 0){
-      console.log("LLAMADA AL BOTON")
-      filtros_ubicacion.forEach(coordenada => 
-      {
-        
-          ultimaCapa.getSource().clear()
-          console.log(coordenada.longitud, coordenada.latitud)
-          let marcador = new ol.Feature({
-            id: coordenada.id,
-            geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([coordenada.longitud, coordenada.latitud])
-            ),
-          });
-          marcador.setId(coordenada.id);
-          marcador.setStyle(new ol.style.Style({
-            image: new ol.style.Circle({
-            radius: 9,
-            fill: new ol.style.Fill({color: 'black'})
-            })
-          }));
-          filtros.push(marcador);
-        
-      });
-
-      ultimaCapa = new ol.layer.Vector({
-        source: new ol.source.Vector({
-          features: filtros, 
-        }),
-      })
-      
-      
-      map.addLayer(ultimaCapa)
-    }
-     
- 
-  
     
   </script>
 

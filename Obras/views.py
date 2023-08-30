@@ -17,6 +17,7 @@ class ObrasTemplateView(TemplateView):
         
         context = super().get_context_data(**kwargs)
         context['ubicacion'] = Obras.objects.all()
+       
         context['estado'] = EstadoObra.objects.all()
         context['localidad'] = Localidad.objects.all()
         context['organismo'] = Organismo.objects.all()
