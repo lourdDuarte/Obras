@@ -14,7 +14,7 @@
     left: -50px;
     border-radius: 10px;
     width: 34em;
-    height: 250px;
+    height: 300px;
     
   }
 
@@ -44,7 +44,7 @@
     border-radius: 10px;
     
   }
-.ol-popup-content-filter p{
+.ol-popup-content-filter p, .ol-popup-content-filter .dato-no-encontrado {
   margin-top: -2em;
   margin-left: 2em;
   width: 200px;
@@ -52,6 +52,15 @@
   text-align: center;
   border-radius: 5px;
   display: none;
+}
+
+.ol-popup-content-filter .dato-no-encontrado{
+  color: #020202;
+  display: block;
+  font-size: 15px;
+  margin-left: 2em;
+  margin-top: -2em;
+  
 }
   .ol-popup-closer {
     text-decoration: none;

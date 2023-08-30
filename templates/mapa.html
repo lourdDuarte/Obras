@@ -14,6 +14,7 @@
         <div id="filter-content" class="ol-popup-content-filter">
         <button type="submit" class="ClearButton" id="buttonFilter"><i class="fa-solid fa-delete-left"></i></button>
         <p id="dato-encontrado">Se encontraron datos <i class="fa-solid fa-check"></i></p> 
+        <h2 id="dato-no-encontrado" class="dato-no-encontrado">No hay filtros aplicados <i class="fa-solid fa-xmark"></i></i></h2> 
         <form method="post">
           {% csrf_token %}
 
@@ -108,7 +109,7 @@
             {% endfor %}
         ]
     
-  console.log(coordenadas)
+  
 
     datos_obra =
     [
@@ -140,13 +141,19 @@
       
       {% endfor %}
     ]
+    console.log(filtros_ubicacion)
     var buttonFilter = document.getElementById('buttonFilter');
     buttonFilter.addEventListener("click", function() {
       
       location.href="{% url 'mapa'  %}"
+      
     });
     
-    
+    var button = document.getElementById('miButton');
+    buttonFilter.addEventListener("click", function() {
+      
+      console.log("****************")
+    });
   </script>
 
 {% endblock container %}  

@@ -47,10 +47,11 @@ class ObrasTemplateView(TemplateView):
 
         
         context = self.get_context_data()
-        context['data'] = data
-        print("*********** DATA FINAL************")
-        print(context['data'])
-        print("*********** DATA FINAL************")
+        if (organismo != '0' or sector != '0' or estado != '0' or localidad != '0' ):
+            context['data'] = data
+            print("*********** DATA FINAL************")
+            print(context['data'])
+            print("*********** DATA FINAL************")
        
         
         

@@ -5,6 +5,7 @@ var container = document.getElementById('popup');
 var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
 var dato_encontrado = document.getElementById('dato-encontrado');
+var dato_no_encontrado = document.getElementById('dato-no-encontrado');
 //FIN VARIABLES
 
 //INICIALIZACION DE LISTAS PARA LOS MARCADORES
@@ -117,7 +118,9 @@ map.on('click', function (e) {
 
 
 if (filtros_ubicacion.length > 0){
+      dato_no_encontrado.style.display = 'none';
       dato_encontrado.style.display = 'block';
+      
       filtros_ubicacion.forEach(coordenada => 
       {
           
