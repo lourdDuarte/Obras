@@ -1,4 +1,5 @@
 // VARIABLES
+
 var filter_container = document.getElementById('popup-filter');
 var filter_content = document.getElementById('filter-content');
 var container = document.getElementById('popup');
@@ -6,6 +7,7 @@ var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
 var dato_encontrado = document.getElementById('dato-encontrado');
 var dato_no_encontrado = document.getElementById('dato-no-encontrado');
+
 //FIN VARIABLES
 
 //INICIALIZACION DE LISTAS PARA LOS MARCADORES
@@ -41,44 +43,7 @@ var map = new ol.Map({
 
 //FIN CARGA MAPA PRINCIPAL
 
-//CARGA DE UBICACIONES DE TODAS LAS OBRAS 
-coordenadas.forEach(coordenada => {
-        
-  let marcador = new ol.Feature({
-      id: coordenada.id,
-      geometry: new ol.geom.Point(
-          ol.proj.fromLonLat([coordenada.longitud, coordenada.latitud])
-      ),
-  });
-  marcador.setId(coordenada.id);
-  marcador.setStyle(new ol.style.Style({
-        image: new ol.style.Icon({
-            src: '/static/obra.png',
-            scale: 0.2,
-      })
-  }));
-  marcadores.push(marcador);
-});
-
-var ultimaCapa = new ol.layer.Vector({
-source: new ol.source.Vector({
-  features: marcadores, 
-}),
-});
-
-map.addLayer(ultimaCapa)
-
-//FIN CARGA DE UBICACIONES DE TODAS LAS OBRAS 
-
-closer.onclick = function() {
-  overlay.setPosition(undefined);
-  closer.blur();
-  return false;
-};
-
-
-
-
+// MODAL CON DETALLE DE LAS OBRAS
 map.on('click', function (e) {
   map.forEachFeatureAtPixel(e.pixel, function (feature, layer) {
 
@@ -111,41 +76,45 @@ map.on('click', function (e) {
   
 });
 
+// CIERRE DE MODAL
+closer.onclick = function() {
+  overlay.setPosition(undefined);
+  closer.blur();
+  return false;
+};
 
-  
-    
 
 
+
+//************************** CARGA DE UBICACIONES ********************************/
+
+//CARGA DE UBICACIONES DE TODAS LAS OBRAS 
+
+ubicaciones_obras = cargar_datos(coordenadas, marcadores)
+var ultimaCapa = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    features: ubicaciones_obras, 
+  }),
+});
+
+map.addLayer(ultimaCapa)
+
+//FIN CARGA DE UBICACIONES DE TODAS LAS OBRAS 
+
+
+//CARGA DE UBICACIONES CON FILTROS APLICADOS DE TODAS LAS OBRAS
 
 if (filtros_ubicacion.length > 0){
       dato_no_encontrado.style.display = 'none';
       dato_encontrado.style.display = 'block';
-      
-      filtros_ubicacion.forEach(coordenada => 
-      {
-          
-          ultimaCapa.getSource().clear()
 
-          let marcador = new ol.Feature({
-            id: coordenada.id,
-            geometry: new ol.geom.Point(
-                ol.proj.fromLonLat([coordenada.longitud, coordenada.latitud])
-            ),
-          });
-          marcador.setId(coordenada.id);
-          marcador.setStyle(new ol.style.Style({
-            image: new ol.style.Icon({
-                src: '/static/obra.png',
-                scale: 0.2,
-          })
-          }));
-          filtros.push(marcador);
-        
-      });
+      ultimaCapa.getSource().clear() //borra marcadores existentes
+
+      obras_filtradas = cargar_datos(filtros_ubicacion, filtros)
 
       ultimaCapa = new ol.layer.Vector({
         source: new ol.source.Vector({
-          features: filtros, 
+          features: obras_filtradas, 
         }),
       })
       
