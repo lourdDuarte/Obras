@@ -3,6 +3,6 @@
 Filters were also generated</span>
 <p>Creation of map with: Open Layers</p>
 
-<a href="https://lourdduarte.github.io/Portfolio/](https://lourduarte01.pythonanywhere.com/mapa/)">View DEMO</a>
+<a href="https://lourdduarte.github.io/Portfolio/](https://lourduarte01.pythonanywhere.com/mapa/">View DEMO</a>
 
 ![image](https://github.com/lourdDuarte/Obras/assets/66228399/373e4865-34b5-471c-bcaf-7df54ecf85ad)
