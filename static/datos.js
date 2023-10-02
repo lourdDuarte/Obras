@@ -10,12 +10,16 @@ function cargar_datos(ubicacion, feature){
           ),
       });
       marcador.setId(coordenada.id);
-      marcador.setStyle(new ol.style.Style({
+      if(coordenada.sector == 'Infraestructura urbana'){
+        marcador.setStyle(new ol.style.Style({
             image: new ol.style.Icon({
-                src: '/static/obra.png',
+                src: '/static/urbana.png',
                 scale: 0.2,
           })
       }));
+
+      }
+      
       feature.push(marcador);
     });
   
