@@ -110,8 +110,20 @@
             {% endfor %}
         ]
   console.log(coordenadas)
-    
   
+  iconos_obras =
+  [
+    {% for icon in sector %}
+        {
+
+            'nombre': '{{icon.nombre_sector}}',
+            'ruta': '{{icon.icono}}'
+            
+
+        },
+    {% endfor %}
+]
+console.log(iconos_obras)
 
     datos_obra =
     [

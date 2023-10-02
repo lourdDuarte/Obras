@@ -90,7 +90,7 @@ closer.onclick = function() {
 
 //CARGA DE UBICACIONES DE TODAS LAS OBRAS 
 
-ubicaciones_obras = cargar_datos(coordenadas, marcadores)
+ubicaciones_obras = cargar_datos(coordenadas, iconos_obras, marcadores)
 var ultimaCapa = new ol.layer.Vector({
   source: new ol.source.Vector({
     features: ubicaciones_obras, 
