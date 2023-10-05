@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-7y)q8urwr3tyjf*lxg9*=7(ylnz2t9k9$!ikpd=6s318gw=hr5
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Application definition
 
@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'EstadoObra',
     'Localidad',
     'Organismo',
-    'SectorObra'
+    'SectorObra',
+    'financiamiento'
     
 ]
 

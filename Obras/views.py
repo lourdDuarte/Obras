@@ -58,6 +58,22 @@ class ObrasTemplateView(TemplateView):
         return render(request, self.template_name, context)
     
         
+    def view_dashboard(request):
+        total_obras = Obras.objects.all().count()
+        obras_finalizadas = Obras.objects.filter(estado_obra=3).count()
+        obras_formosa = Obras.objects.filter(localidad=1).count()
+        obras_parciales = Obras.objects.filter(estado_obra=4).count()
+        obras_interrumpidas = Obras.objects.filter(estado_obra=5).count()
+        context = {'finalizadas': obras_finalizadas}
+        context_total_obras = {'total_obras': total_obras}
+        context_obras_formosa = {'obras_formosa': obras_formosa}
+        context_obras_formulacion = {'obras_parciales': obras_parciales}
+        context_obras_interrumpidas = {'obras_interrumpidas':obras_interrumpidas}
+        context.update(context_total_obras)
+        context.update(context_obras_formosa)
+        context.update(context_obras_formulacion)
+        context.update(context_obras_interrumpidas)
+        return render(request, 'dashboard.html', context)
      
     
 

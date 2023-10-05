@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+<title>Dashboard</title>
+{% endblock head_content %}
+{% block container %}
+<main >
+    
+    <div class="content">
+        <h1>Dashboard Obras de Formosa</h1>
+        <div class="card">
+            <h1 class="title-card">Total </h1>
+            <p class="resultado">{{total_obras}}</p>
+        </div>
+        
+        <div class="card">
+            <h1 class="title-card">Tecnicas Finalizados</h1>
+            <p class="resultado">{{ finalizadas }}</p>    
+        </div>
+        <div class="card">
+            <h1 class="title-card">Ubicadas en Formosa Capital</h1>
+            <p class="resultado">{{ obras_formosa }}</p>
+        </div>
+        <div class="card">
+            <h1 class="title-card">Completados parcialmente</h1>
+            <p class="resultado">{{obras_parciales}}</p>
+        </div>
+        <div class="card">
+            <h1 class="title-card">Interrumpidas</h1>
+            <p class="resultado">{{obras_interrumpidas}}</p>
+        </div>
+
+        <div class="div-frame">
+            <a href="{% url 'mapa'  %}">
+                <i class="fa-solid fa-expand" style="color: #000;"></i>
+            </a>
+            
+        </div>
+        <iframe scrolling="no" id="encoder_iframe" src="{% url 'mapa'  %}" class="frame-mapa">
+        
+    </div>
+    
+    </iframe>
+</main>
+
+{% endblock container %}

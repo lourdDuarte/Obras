@@ -35,8 +35,9 @@ var map = new ol.Map({
   overlays: [overlay],
   view: new ol.View({
     center: ol.proj.fromLonLat([-58.1781400, -26.1775300]),
-    zoom: 8
-  })
+    zoom: 7.5
+  }),
+
 });
 
 
@@ -95,6 +96,7 @@ var ultimaCapa = new ol.layer.Vector({
   source: new ol.source.Vector({
     features: ubicaciones_obras, 
   }),
+  
 });
 
 map.addLayer(ultimaCapa)
@@ -110,7 +112,7 @@ if (filtros_ubicacion.length > 0){
 
       ultimaCapa.getSource().clear() //borra marcadores existentes
 
-      obras_filtradas = cargar_datos(filtros_ubicacion, filtros)
+      obras_filtradas = cargar_datos(filtros_ubicacion, iconos_obras, filtros)
 
       ultimaCapa = new ol.layer.Vector({
         source: new ol.source.Vector({

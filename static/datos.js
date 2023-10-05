@@ -1,6 +1,8 @@
-//FUNCION PARA CARGAR LOS ARRAY CON LAS UBICACIONES
 
-function cargar_datos(ubicacion, iconos, feature){
+  //FUNCION PARA CARGAR LOS ARRAY CON LAS UBICACIONES
+
+  function cargar_datos(ubicacion, iconos, feature){
+    console.log(ubicacion)
     ubicacion.forEach(coordenada => {
           
       let marcador = new ol.Feature({
@@ -12,15 +14,17 @@ function cargar_datos(ubicacion, iconos, feature){
       marcador.setId(coordenada.id);
       iconos.forEach(icon => {
         if(coordenada.sector == icon.nombre){
-            marcador.setStyle(new ol.style.Style({
+          marcador.setStyle(new ol.style.Style({
               image: new ol.style.Icon({
                   src: '/static/'+icon.ruta,
-                  scale: 0.2,
+                  scale: 0.1,
             })
           }));
+    
         }
 
       })
+      
       
       feature.push(marcador);
     });
@@ -29,5 +33,5 @@ function cargar_datos(ubicacion, iconos, feature){
   }
   
   //FIN FUNCION
-
+  
   

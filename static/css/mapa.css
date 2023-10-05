@@ -3,7 +3,7 @@
   width: 100%;
 }
 
-.ol-popup, .ol-popup-filter {
+.ol-popup, .ol-popup-filter{
     position: absolute;
     display: flex; 
     -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
@@ -15,26 +15,53 @@
     border-radius: 10px;
     width: 34em;
     height: 300px;
+    border: 2px solid black;
+  }
+  .ol-popup-filter, .ol-popup-content-filter, .ol-popup-content-reference {
+    z-index: 1;
+    width: 25em;
+    height: 300px;
+    margin-left: 4em;
     
+    background-color: rgb(243, 237, 237);
+     
+   }
+ 
+  .ol-popup-reference{
+    background-color: transparent;
+    position: absolute;
+    width: 15em;
+    height: 120px;
+    top: 20em;
   }
 
-  .ol-popup-filter, .ol-popup-content-filter {
-   z-index: 1;
-   width: 25em;
-   height: 300px;
-   margin-left: 4em;
-
-   background-color: rgb(243, 237, 237);
-    
+  .ol-popup-content-reference{
+    width: 20em;
+    height: 250px;
+    margin-left: -4px;
+    border-radius: 10px;
+    border: 2px solid black;
   }
 
+  .ol-popup-content-reference p{
+    text-align: center;
+    margin-top: 5px;
+    font-weight: 500;
+   
+  }
+
+  
   .ol-popup-content-filter h2{
     color: #ffff;
     font-size: 26px;
     
   }
 
-  
+  .ref{
+    margin-left: 20px;
+    display: block;
+    text-align: left;
+  }
 
   .ol-popup-content, .ol-popup-content-filter{
 
@@ -131,3 +158,4 @@
     margin-left: -3em;
     margin-top: 0.5em;
   }
+

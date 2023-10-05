@@ -21,6 +21,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('mapa/', ObrasTemplateView.as_view(), name = "mapa")
+
+    path('mapa/', ObrasTemplateView.as_view(template_name="mapa.html"), name = 'mapa'),
+    path('dashboard/', ObrasTemplateView.view_dashboard, name='dashboard')
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

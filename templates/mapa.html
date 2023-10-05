@@ -6,7 +6,7 @@
 {% endblock head_content %}
    
 {% block container %}
-<h2>Obras de Formosa <i class="fa-solid fa-city"></i></h2>
+
 <section>
     <div  id="map" class="map">
       <div id="popup-filter" class="ol-popup-filter">
@@ -22,7 +22,7 @@
 
             <option value='0' selected>Sector</option>
             {% for s in sector  %}
-            <option value="{{s.id}}">{{s.nombre_sector}}</option>
+            <option value="{{s.id}}">{{s.nombre_sector}} </i></option>
             {% endfor %}
             
            
@@ -69,7 +69,22 @@
           
           
         </div>
+        <div id="popup-reference" class="ol-popup-reference">
         
+          <div id="reference-content" class="ol-popup-content-reference">
+            <p>Referencias</p>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #ff5d5d;"></i> Infraestructura energética</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #5f7eff;"></i> Infraestructura hídrica</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #48ed9e;"></i> Infraestructura en salud</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #d778ea;"></i> Conectividad física</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #ffcd5f;"></i> Conectividad digital</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #2ba7d8;"></i> Infraestructura productiva</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #f25e95;"></i> Infraestructura urbana</span>
+            <span class="ref"><i class="fa-solid fa-circle" style="color: #eadf0f;"></i> Infraestructura educativa </span>
+            
+            
+          </div>
+        </div>
       </div>
     </div>
     <div id="popup" class="ol-popup">
@@ -109,8 +124,7 @@
                 },
             {% endfor %}
         ]
-  console.log(coordenadas)
-  
+ 
   iconos_obras =
   [
     {% for icon in sector %}
@@ -122,8 +136,8 @@
 
         },
     {% endfor %}
-]
-console.log(iconos_obras)
+  ]
+
 
     datos_obra =
     [
@@ -148,6 +162,7 @@ console.log(iconos_obras)
       {% for filtro in data  %}
        {
         'id': {{filtro.id}},
+        'sector':'{{filtro.sector}}',
         'longitud':{{filtro.longitud}}, 
         'latitud':{{filtro.latitud}},
       

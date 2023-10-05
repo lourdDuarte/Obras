@@ -3,6 +3,7 @@ from EstadoObra.models import EstadoObra
 from Localidad.models import Localidad
 from Organismo.models import Organismo
 from SectorObra.models import Sector
+from financiamiento.models import Financiamiento
 
 # Create your models here.
 class Obras(models.Model):
@@ -10,6 +11,7 @@ class Obras(models.Model):
     organismo_financiador = models.ForeignKey(Organismo,on_delete=models.CASCADE)
     estado_obra = models.ForeignKey(EstadoObra, on_delete=models.CASCADE)
     localidad = models.ForeignKey(Localidad, on_delete=models.CASCADE)
+    financiamiento = models.ForeignKey(Financiamiento, on_delete=models.CASCADE)
 
     nombre = models.CharField(max_length=200, blank=True, null=True)
     valor = models.CharField(max_length=200, blank=True, null=True)
