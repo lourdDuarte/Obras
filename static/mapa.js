@@ -7,6 +7,7 @@ var content = document.getElementById('popup-content');
 var closer = document.getElementById('popup-closer');
 var dato_encontrado = document.getElementById('dato-encontrado');
 var dato_no_encontrado = document.getElementById('dato-no-encontrado');
+var popup_filter = document.getElementById('ol-popup-filter');
 
 //FIN VARIABLES
 
@@ -25,6 +26,7 @@ const overlay = new ol.Overlay({
 });
 
 
+
 var map = new ol.Map({
   target: 'map',
   layers: [
@@ -34,8 +36,8 @@ var map = new ol.Map({
   ],
   overlays: [overlay],
   view: new ol.View({
-    center: ol.proj.fromLonLat([-58.1781400, -26.1775300]),
-    zoom: 7.5
+    center: ol.proj.fromLonLat([-60.1450400, -24.555300]),
+    zoom: 8
   }),
 
 });
@@ -91,15 +93,15 @@ closer.onclick = function() {
 
 //CARGA DE UBICACIONES DE TODAS LAS OBRAS 
 
-ubicaciones_obras = cargar_datos(coordenadas, iconos_obras, marcadores)
-var ultimaCapa = new ol.layer.Vector({
-  source: new ol.source.Vector({
-    features: ubicaciones_obras, 
-  }),
+// ubicaciones_obras = cargar_datos(coordenadas, iconos_obras, marcadores)
+// var ultimaCapa = new ol.layer.Vector({
+//   source: new ol.source.Vector({
+//     features: ubicaciones_obras, 
+//   }),
   
-});
+// });
 
-map.addLayer(ultimaCapa)
+// map.addLayer(ultimaCapa)
 
 //FIN CARGA DE UBICACIONES DE TODAS LAS OBRAS 
 
@@ -109,12 +111,12 @@ map.addLayer(ultimaCapa)
 if (filtros_ubicacion.length > 0){
       dato_no_encontrado.style.display = 'none';
       dato_encontrado.style.display = 'block';
-
-      ultimaCapa.getSource().clear() //borra marcadores existentes
+      popup_filter.style.display = 'block';
+      //ultimaCapa.getSource().clear() //borra marcadores existentes
 
       obras_filtradas = cargar_datos(filtros_ubicacion, iconos_obras, filtros)
 
-      ultimaCapa = new ol.layer.Vector({
+      var ultimaCapa = new ol.layer.Vector({
         source: new ol.source.Vector({
           features: obras_filtradas, 
         }),
@@ -123,4 +125,14 @@ if (filtros_ubicacion.length > 0){
       
       map.addLayer(ultimaCapa)
 
+}
+
+function maximizar_filtros(){
+  
+
+  popup_filter.style.display = 'block';
+}
+
+function minimizar_filtros(){
+  popup_filter.style.display = 'none';
 }

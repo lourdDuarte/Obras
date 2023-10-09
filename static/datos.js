@@ -17,7 +17,7 @@
           marcador.setStyle(new ol.style.Style({
               image: new ol.style.Icon({
                   src: '/static/'+icon.ruta,
-                  scale: 0.1,
+                  scale: 0.2,
             })
           }));
     

@@ -1,0 +1,41 @@
+var style = new ol.style.Style({
+  fill: new ol.style.Fill({
+    color: 'rgba(255, 255, 255, 0.6)'
+  }),
+  stroke: new ol.style.Stroke({
+    color: '#000',
+    width: 1
+  }),
+  text: new ol.style.Text({
+    font: '12px Calibri,sans-serif',
+    fill: new ol.style.Fill({
+      color: '#000'
+    }),
+   
+  })
+});
+
+var vectorLayer = new ol.layer.Vector({
+  source: new ol.source.Vector({
+    url: 'https://openlayers.org/en/v3.20.1/examples/data/geojson/countries.geojson',
+    format: new ol.format.GeoJSON()
+  }),
+  style: function(feature, resolution) {
+    style.getText().setText(resolution < 5000 ? feature.get('name') : '');
+    return style;
+  }
+});
+
+var map = new ol.Map({
+  layers: [
+    new ol.layer.Tile({
+      source: new ol.source.OSM()
+    }),
+    vectorLayer
+  ],
+  target: 'map',
+  view: new ol.View({
+    center: [0, 0],
+    zoom: 1
+  })
+});

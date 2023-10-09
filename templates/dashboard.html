@@ -9,7 +9,7 @@
     <div class="content">
         <h1>Dashboard Obras de Formosa</h1>
         <div class="card">
-            <h1 class="title-card">Total </h1>
+            <h1 class="title-card">Total localizadas </h1>
             <p class="resultado">{{total_obras}}</p>
         </div>
         
@@ -29,18 +29,29 @@
             <h1 class="title-card">Interrumpidas</h1>
             <p class="resultado">{{obras_interrumpidas}}</p>
         </div>
-
-        <div class="div-frame">
+        {% comment %} ______________________________________ {% endcomment %}
+        <div class="card">
+            <h1 class="title-card">Ideas de obras</h1>
+            <p class="resultado">{{obra_ideas}}</p>
+        </div>
+        <div class="card">
+            <h1 class="title-card">Obras en formulacion</h1>
+            <p class="resultado">{{obras_formulacion}}</p>
+        </div>
+        
+        <div class="div-button">
             <a href="{% url 'mapa'  %}">
-                <i class="fa-solid fa-expand" style="color: #000;"></i>
+                <button class="btn"><i class="animation"></i>Ver mapa <i class="fa-solid fa-map-location-dot"></i><i class="animation"></i>
+                </button>
             </a>
             
         </div>
-        <iframe scrolling="no" id="encoder_iframe" src="{% url 'mapa'  %}" class="frame-mapa">
+       
+        
+        
         
     </div>
-    
-    </iframe>
+  
 </main>
 
 {% endblock container %}
