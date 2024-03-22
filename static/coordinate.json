@@ -1,0 +1,24 @@
+{
+    "type": "FormosaCoordenada",
+    "features": [
+        {
+            "type": "Feature",
+            "id": "AR",
+            "properties": {
+            "name": "Formosa"
+            },
+            "geometry": {
+                "type": "Polygon",
+                "coordinates": [
+                    [
+                        [-62.470214, -25.260495],
+                        [-62.470214, -27.260495],
+                        [-62.270214, -27.260495],
+                        [-62.270214, -25.260495],
+                        [-62.470214, -25.260495]
+                    ]
+                ]
+            }
+        }
+    ]
+}

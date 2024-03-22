@@ -1,0 +1,133 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+
+    <title>Actualizar obra</title>
+{% endblock head_content %}
+
+{% block container %}
+<main class="main-add">
+  <div class="container-fluid px-4">   
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+      <div class="card-header"><h3 class="text-center font-weight-light my-4">Actualizar obra</h3></div>
+      <div class="card-body">
+            <form role="form" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+              
+              {% if messages %}
+                  <ul class="messages">
+                      {% for message in messages %}
+                          <li
+                              {% if message.tags %} 
+                                  class="{{ message.tags }}"
+                              {% endif %}>{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+                <div class="col-12 div-input">
+                    {{form.nombre.errors}}
+                    <label for="{{form.nombre.id_for_label}}" class="col-lg-3 control-label" >Nombre</label>
+                    <div class="div-upd" > {{form.nombre}} </div>
+                    
+                    
+                </div>
+                <div class="col-12 div-input">
+                    {{form.valor.errors}}
+                     <label for="{{form.valor.id_for_label}}" class="col-lg-3 control-label">Valor</label>
+                     <div class="div-upd"> {{form.valor}} </div>
+                    
+                     
+                 </div>
+                 <div class="col-12 div-input">
+                    {{form.descripcion.errors}}
+                     <label for="{{form.descripcion.id_for_label}}" class="col-lg-3 control-label">Descripcion</label>
+                     <div class="div-upd"> {{form.descripcion}} </div>
+                    
+                     
+                 </div>
+                 <div class="col-12 div-input">
+                    {{form.periodo_ejecucion.errors}}
+                     <label for="{{form.periodo_ejecucion.id_for_label}}" class="col-lg-3 control-label">Periodo ejecucion</label>
+                     <div class="div-upd"> {{form.periodo_ejecucion}} </div>
+                    
+                     
+                 </div>
+                 <div class="col-12 div-input">
+                    {{form.latitud.errors}}
+                     <label for="{{form.latitud.id_for_label}}" class="col-lg-3 control-label">Latitud</label>
+                     <div class="div-upd"> {{form.latitud}} </div>
+                    
+                     
+                 </div>
+                 <div class="col-12 div-input">
+                    {{form.longitud.errors}}
+                     <label for="{{form.longitud.id_for_label}}" class="col-lg-3 control-label">Longitud</label>
+                     <div class="div-upd"> {{form.longitud}} </div>
+                    
+                     
+                 </div>
+                  <div class="col-12 div-input">
+                     {{form.sector.errors}}
+                      <label for="{{form.sector.id_for_label}}" class="col-lg-3 control-label">Sector</label>
+                      <div class="div-upd"> {{form.sector}} </div>
+                     
+                      
+                  </div>
+                  <div class="col-12 div-input">
+                    {{form.organismo_financiador.errors}}
+                     <label for="{{form.organismo_financiador.id_for_label}}"  class="col-lg-3 control-label">Organismo financiador</label>
+                     <div class="div-upd">{{form.organismo_financiador}}</div>
+                     
+                  </div>
+                  
+                 
+                 <div class="col-12 div-input">
+                  {{form.estado_obra.errors}}
+                   <label for="{{form.estado_obra.id_for_label}}" class="col-lg-3 control-label">Estado de la obra</label>
+                   <div class="div-upd">{{form.estado_obra}}</div>
+                   
+                  </div>
+                  <div class="col-12 div-input">
+                    {{form.localidad.errors}}
+                     <label for="{{form.localidad.id_for_label}}" class="col-lg-3 control-label">Localidad</label>
+                     <div class="div-upd">{{form.localidad}}</div>
+                     
+                    </div>
+                    <div class="col-12 div-input">
+                        {{form.financiamiento.errors}}
+                         <label for="{{form.financiamiento.id_for_label}}" class="col-lg-3 control-label">Financiamiento</label>
+                         <div class="div-upd">{{form.financiamiento}}</div>
+                         
+                    </div>
+                  
+                
+                    <div class="card-footer text-center py-3" style="margin-top:2em">
+                        <button type="submit" style="background: #1558c3;" class="btn btn-primary">Guardar</button>
+                    </div>
+              </form><!-- End Horizontal Form -->
+      </div>
+      
+  </div>
+  </div>
+</main>
+
+
+
+
+
+
+
+{% endblock container %}
+
+
+
+
+
+
+
+
+
+
+
+

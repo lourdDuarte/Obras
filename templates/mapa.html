@@ -7,23 +7,28 @@
    
 {% block container %}
 
-<section>
-    <div class="content-btn">
-      <a href="{% url 'dashboard'  %}">
-        <button class="btn-dashboard" ><i class="fa-sharp fa-solid fa-gauge" style="color: #0454ff;"></i> Dashboard</button>
-      </a>
+<body style="overflow-x: hidden; overflow-y: hidden;">
+  <section style="overflow-x: hidden; overflow-y: hidden;">
+    <div class="content-btn" style="overflow-x: hidden; overflow-y: hidden;">
+     
       
-      <button type="submit" class="ClearButton" id="buttonFilter"><i class="fa-solid fa-repeat" style="color: #0454ff;"></i> Reiniciar mapa  </button>
+      <button type="submit" class="ClearButton" id="buttonFilter"><i class="fa-solid fa-repeat" style="color: #1558c3;"></i> Reiniciar mapa  </button>
       
-      <button class="btn-filtros" onclick="maximizar_filtros()"><i class="fa-solid fa-filter" style="color: #0454ff;"></i> Filtros </button>
-      
+      <button class="btn-filtros btn-solicitar" id="filtros" onclick="maximizar_filtros()"><i class="fa-solid fa-filter" style="color: #1558c3;"></i> Filtros </button>
+      <button class="btn-filtros btn-solicitar " id="solicitar-excel" onclick="solicitar_datos()"><i class="fa-solid fa-filter" style="color: #1558c3;"></i>Solicitar Excel</button>
+      <button class="btn-filtros btn-descargar" id="descargar-excel" onclick="descargar_datos()"><i class="fa-solid fa-filter" style="color: #1558c3;"></i>Descargar Excel</button>
+      <div class="div-reference">
+        {% for s in sector  %}
+          <p style="font-size: 12px;">{{ s.nombre_sector }}: <img  src="/static/{{ s.icono }}" alt="Imagen"></p>
+        {% endfor %}
+      </div>
       
       <div  id="map" class="map">
         
         <div id="ol-popup-filter" class="ol-popup-filter">
           
           <div id="filter-content" class="ol-popup-content-filter">
-          <button class="minimizar" onclick="minimizar_filtros()" ><i class="fa-solid fa-window-minimize"></i></button>
+            <button type="submit" onclick="minimizar_filtros()"  class="minimizar" >Cerrar</button>
           <p id="dato-encontrado">Se encontraron datos <i class="fa-solid fa-check"></i></p> 
           <h2 id="dato-no-encontrado" class="dato-no-encontrado">No hay filtros aplicados </h2> 
           <form method="post">
@@ -81,65 +86,46 @@
             
             
           </div>
-          {% comment %} <div id="popup-reference" class="ol-popup-reference">
           
-            <div id="reference-content" class="ol-popup-content-reference">
-              <p>Referencias</p>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #ff5d5d;"></i> Infraestructura energética</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #5f7eff;"></i> Infraestructura hídrica</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #48ed9e;"></i> Infraestructura en salud</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #d778ea;"></i> Conectividad física</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #ffcd5f;"></i> Conectividad digital</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #2ba7d8;"></i> Infraestructura productiva</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #f25e95;"></i> Infraestructura urbana</span>
-              <span class="ref"><i class="fa-solid fa-circle" style="color: #eadf0f;"></i> Infraestructura educativa </span>
-              
-              
-            </div>
-          </div> {% endcomment %}
         </div>
       </div>
-      <div id="popup"  class="ol-popup">
+      <div id="popup"  class="ol-popup" >
         <a href="#" id="popup-closer" class="ol-popup-closer"></a>
-        <div id="popup-content" class="ol-popup-content"></div>
+        <div id="popup-content" class="ol-popup-content" style="max-height:290px;" ></div>
         </div>
       </div>
     </div>  
   </section>
  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-         
-        </div>
-        
-      </div>
-    </div>
-  </div>
+
   
   <script>
 
   //DATOS
-  coordenadas = 
-        [
-            {% for ubi in ubicacion %}
-                {
+  function obtenerCoordenadas(){
+    coordenadas = 
+      [
+          {% for ubi in ubicacion %}
+              {
 
-                    'id': {{ubi.id}},
-                    'sector':'{{ubi.sector}}',
-                    'longitud':{{ubi.longitud}}, 
-                    'latitud':{{ubi.latitud}}
-                    
+                  'id': {{ubi.id}},
+                  'sector':'{{ubi.sector}}',
+                  'longitud':{{ubi.longitud}}, 
+                  'latitud':{{ubi.latitud}}
+                  
 
-                },
-            {% endfor %}
-        ]
- 
-  iconos_obras =
-  [
-    {% for icon in sector %}
+              },
+          {% endfor %}
+      ]
+
+    return coordenadas
+
+  }
+  
+  function obtenerIconos(){
+    iconos_obras =
+      [
+      {% for icon in sector %}
         {
 
             'nombre': '{{icon.nombre_sector}}',
@@ -147,12 +133,16 @@
             
 
         },
-    {% endfor %}
-  ]
+      {% endfor %}
+      ]
 
+    return iconos_obras
+  }
+  
 
+  function obtenerDatosObra(){
     datos_obra =
-    [
+      [
         {% for ubi in ubicacion %}
             {
                 'id': {{ubi.id}},
@@ -160,35 +150,52 @@
                 'latitud':{{ubi.latitud}},
                 'nombre':'{{ubi.nombre}}',
                 'valor':'{{ubi.valor}}',
+                'sector':'{{ubi.sector}}',
                 'localidad': '{{ubi.localidad}}',
                 'descripcion': '{{ubi.descripcion}}',
+                'estado':'{{ubi.estado_obra}}',
+                'periodo':'{{ubi.periodo_ejecucion}}'
+                
                 
             },
             
         {% endfor %}       
-    
-    ]
 
+      ]
+
+    return datos_obra
+  }
+ 
+  function obtenerDatosFiltrados(){
     filtros_ubicacion = 
-    [
-      {% for filtro in data  %}
-       {
-        'id': {{filtro.id}},
-        'sector':'{{filtro.sector}}',
-        'longitud':{{filtro.longitud}}, 
-        'latitud':{{filtro.latitud}},
-      
-       },
-      
-      {% endfor %}
-    ]
+      [
+        {% for filtro in data  %}
+        {
+          'id': {{filtro.id}},
+          'sector':'{{filtro.sector}}',
+          'longitud':{{filtro.longitud}}, 
+          'latitud':{{filtro.latitud}},
 
-    var buttonFilter = document.getElementById('buttonFilter');
+        },
+
+        {% endfor %}
+      ]
+
+    return filtros_ubicacion
+
+  }
+
+  obtenerCoordenadas()
+  obtenerDatosFiltrados()
+  obtenerDatosObra()
+  obtenerIconos()
+
+  var buttonFilter = document.getElementById('buttonFilter');
     buttonFilter.addEventListener("click", function() {
-      
+      localStorage.clear();
       location.href="{% url 'mapa'  %}"
       
-    });
+  });
     
    
   </script>

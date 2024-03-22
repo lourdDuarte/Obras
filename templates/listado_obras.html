@@ -1,0 +1,90 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+
+    <title>Listado</title>
+{% endblock head_content %}
+
+{% block container %}
+<main style="height:900px">
+  <div class="container-fluid px-4">   
+    <div class="card mb-4 card-body-table">
+      {% if messages %}
+                  <ul class="messages">
+                      {% for message in messages %}
+                          <li
+                              {% if message.tags %} 
+                                  class="{{ message.tags }}"
+                              {% endif %}>{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+        {% endif %}
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Listado de Obras
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Estado de obra</th>
+                  <th scope="col">Localidad</th>
+                  <th scope="col">Periodo de ejecucion</th>
+ 
+                  <th scope="col">Acción</th>
+                  
+                </tr>
+              </thead>
+              <tbody>
+                {% for obra in obras %}
+                  <tr>
+                    <td>{{obra.nombre}}</td>
+                    <td>{{obra.estado_obra}}</td>
+                    <td>{{obra.localidad}}</td>
+                    <td>{{obra.periodo_ejecucion}}</td>
+                    <td>
+                      <a href="{% url 'actualizar' obra.id %}">
+                        <i class="fa-regular fa-pen-to-square" style="color: #1558c3; font-size:25px"></i>
+                      </a>
+                      <button type="button" style="border: none; outline: none; background:#ffffff" data-toggle="modal" data-target="#exampleModalLong{{ obra.id }}">
+                        <i class="fa-solid fa-trash" style="color: #1558c3;font-size:25px"></i>
+                      </button>
+                      
+                    </td>
+                  </tr>
+                  <div class="modal fade" id="exampleModalLong{{ obra.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Eliminar obra</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ¿Seguro que desea eliminar la obra: {{ obra.nombre }}?
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                          <a href="{% url 'eliminar' obra.id %}">
+                            <button type="button" class="btn btn-primary">Eliminar</button>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                {% endfor %}
+                
+                
+              </tbody>
+            </table>
+        </div>
+    </div>
+  </div>
+</main>
+
+
+{% endblock container %}

@@ -1,11 +1,21 @@
 .map {
-  height: 890px;
+  height: 745px;
   width: 99%;
   margin-left: 0.5em;
-  margin-top: 1em;
+  margin-top: -0.5em;
   z-index: 1;
-  border: 3px solid #0454ff;
+  border: 3px solid rgb(21, 88, 195);
+  overflow: hidden;
 }
+
+.div-reference{
+  
+  width: 200px;
+  display:flex;
+  margin-top: 2em;
+}
+
+
 
 .ol-popup-filter{
     position: absolute;
@@ -15,17 +25,18 @@
     background-color: rgb(0, 0, 0);
     padding: 10px;
     bottom: 40%;
-    left: -20px;
+    left: 60em;
+    top: 10em;
     border-radius: 10px;
     width: 34em;
-    height: 335px;
-    border: 2px solid #0454ff;
+    height: 250px;
+    border: 2px solid rgb(21, 88, 195);
     
   }
   .ol-popup-filter, .ol-popup-content-filter, .ol-popup-content-reference {
     z-index: 1;
     width: 25em;
-    height: 335px;
+    height: 320px;
     margin-left: 3.5em;
     
     background-color: rgb(243, 237, 237);
@@ -76,10 +87,16 @@
     font-weight: 600;
     width: 10em;
     height: 3em;
-    border: 2px solid #0454ff;
+    border: 2px solid rgb(21, 88, 195);
     border-radius: 5px;
+    
   }
-
+  .btn-solicitar{
+    visibility: visible;
+  }
+  .btn-descargar{
+    visibility: hidden;
+  }
   .content-btn .ClearButton {
     margin-left: 0.6em;
   }
@@ -91,16 +108,19 @@
 
   .content .ol-popup .ol-popup-content, .ol-popup-content-filter{
 
-    width: 30em;
+    width: 15em;
     height: 300px;
     background-color: #0000;
     border-radius: 10px;
     
   }
+
+  
 #popup-content{
   background: #020202;
-  width: 48em;
-  height: 300px;
+  border: 2px solid rgb(21, 88, 195) ;
+  width: 35em;
+  height: 400px;
   border-radius: 10px;
   padding-top: 2em;
 }
@@ -124,6 +144,7 @@
   background: transparent;
   text-align: center;
   border-radius: 5px;
+  display: none;
 }
 .ol-popup-content-filter .dato-no-encontrado{
   color: #020202;
@@ -152,23 +173,47 @@
 
   .minimizar{
     align-items: center;
-    background: transparent;
+    background: #020202;
     border: none;
-    margin-left: 18em;
+    color: #ffffff;
+    margin-left: 16em;
+    border-radius: 5px;
   }
-  .data-p{
+
+  .minimizar i{
+    color: #1558c3;
+    padding-bottom: 0.5em;
+  }
+  .div-data .data-p{
   
-    color: rgb(68, 172, 241);
+    display: block;
+    margin-left: 1em;
   }
   .div-data{
       margin-top: 1em;
-      margin-left: 1em
+      margin-left: 1em;
+     
   }
   .data{
       color: #ffff;
-      
+      padding-left: 0.5em;
   }
 
+  .img-cartel{
+    width: 250px;
+    height: 120px;
+    margin-left: 8em;
+  }
+
+  .img-cartel-mapa{
+    min-width: 360px;
+    height: 150px;
+    position: absolute;
+    top:14em;
+    left: 5em;
+    
+    
+  }
   .filter{
     z-index: 1;
     position: relative;
@@ -200,10 +245,35 @@
     border-radius: 5px;
     width: 6em;
     color: beige;
-    border: 2px solid #0454ff;
+    border: 2px solid #1558c3;
     margin: 1em 0em 0em 4.8em;
   
   }
 
+.prueba{
+  color: rgba(255, 255, 255, 0.6);
+    
+  color: rgba(255, 255, 255, 0.6);
 
+  color: #319FD3;
 
+}
+
+.content-btn h1, .content-btn p{
+  color:#ffff;
+  display:inline-flex;
+  font-size: 25px;
+  margin-left: 1em;
+}
+
+.content-btn p{
+  font-size: 15px;
+}
+
+.content-btn img{
+  width: 40px;
+  margin-top: -10px;
+  background: #ffffff;
+  border-radius: 10px;
+  margin-left: 8px;
+}

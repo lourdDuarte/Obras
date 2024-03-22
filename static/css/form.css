@@ -1,0 +1,33 @@
+.main-class{
+   background: #000;
+   height: 950px;
+   
+}
+
+
+.pegatitle-margin h1{
+    color: aliceblue;
+    margin-left: 10em;
+    padding-top: 2em;
+}
+
+.item-style{
+    color: aliceblue;
+    
+}
+
+.ol-margin{
+    margin-left: 25.5em;
+    
+}
+
+.div-form{
+    margin-left: 35em;
+    margin-top: 2em;
+    width: 800px;
+    
+}
+
+.textarea-style{
+    overflow: hidden;
+}

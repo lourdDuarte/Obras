@@ -23,6 +23,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
 
     path('mapa/', ObrasTemplateView.as_view(template_name="mapa.html"), name = 'mapa'),
-    path('dashboard/', ObrasTemplateView.view_dashboard, name='dashboard')
+    path('dashboard/', ObrasTemplateView.view_dashboard, name='dashboard'),
+    path('formulario/', ObrasTemplateView.add_new_obra, name='formulario'),
+    path('actualizar/<str:pk>/', ObrasTemplateView.actualizar_obra, name='actualizar'),
+    path('listado-obras/', ObrasTemplateView.listado_obras, name='listado-obras'),
+    path('eliminar/<str:pk>/', ObrasTemplateView.eliminar_cartel, name='eliminar'),
+    path('login-obras/', ObrasTemplateView.login, name='login-obras'),
+    path('logout-obras/', ObrasTemplateView.logout_view, name='logout-obras'),
+    path('nuevo-usuario/', ObrasTemplateView.solicitud_usuario, name='nuevo-usuario')
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 

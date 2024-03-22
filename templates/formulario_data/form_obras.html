@@ -1,0 +1,153 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block head_content %}
+
+    <title>Nueva Obra</title>
+{% endblock head_content %}
+
+{% block container %}
+<main class="main-add">
+  <div class="container-fluid px-4">   
+    <div class="card shadow-lg border-0 rounded-lg mt-5">
+      <div class="card-header"><h3 class="text-center font-weight-light my-4">Nueva Obra</h3></div>
+      <div class="card-body">
+            <form role="form" method="POST" enctype="multipart/form-data">
+              {% csrf_token %}
+                
+                {% if messages %}
+                    <ul class="messages">
+                        {% for message in messages %}
+                            <li
+                                {% if message.tags %} 
+                                    class="{{ message.tags }}"
+                                {% endif %}>{{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+                <div class="row mb-3">
+                  <input type="hidden" name="usuario" value="{{request.user.id}}">
+                
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                        <input class="form-control" type="text" name="nombre" />
+                        <label for="inputFirstName">Nombre de la obra</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                        <input class="form-control" type="text" name="valor" />
+                        <label for="inputFirstName">Valor (USD)</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                        <input class="form-control" type="text" maxlength="250" name="descripcion" />
+                        <label for="inputFirstName">Descripcion</label>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                        <input class="form-control" type="text"  name="periodo_ejecucion" />
+                        <label for="inputFirstName">Periodo de ejecucion</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                        <input class="form-control" type="text"  name="latitud" />
+                        <label for="inputFirstName">Latitud</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                        <input class="form-control" type="text"  name="longitud" />
+                        <label for="inputFirstName">Longitud</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                      <select class="form-select" name="sector" aria-label="State">
+                        <option selected>Seleccionar</option>
+                        {% for s in sector  %}
+                            <option value="{{s.id}}">{{s.nombre_sector}}</option>
+                        {% endfor %}
+                        
+                       
+                      </select>
+                      <label for="inputFirstName">Sector</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                      <select class="form-select" name="organismo_financiador" aria-label="State">
+                        <option selected>Seleccionar</option>
+                        {% for o in organismo  %}
+                            <option value="{{o.id}}">{{o.nombre}}</option>
+                        {% endfor %}
+                        
+                       
+                      </select>
+                      <label for="inputFirstName">Organismo Financiador</label>
+                    </div>
+                  </div>
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                      <select class="form-select" name="estado_obra" aria-label="State">
+                        <option selected>Seleccionar</option>
+                        {% for e in estado  %}
+                            <option value="{{e.id}}">{{e.estado}}</option>
+                        {% endfor %}
+                        
+                       
+                      </select>
+                      <label for="inputFirstName">Estado de obra</label>
+                    </div>
+                  </div>
+                
+
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                      <select class="form-select" name="localidad" aria-label="State">
+                        <option selected>Seleccionar</option>
+                        {% for l in localidad  %}
+                        <option value="{{l.id}}">{{l.nombre_localidad}}</option>
+                        {% endfor %}
+                        
+                       
+                      </select>
+                      <label for="inputFirstName">Localidad</label>
+                    </div>
+                  </div>    
+                  <div class="col-md-6 div-add-cartel">
+                    <div class="form-floating">
+                      <select class="form-select" name="financiamiento" aria-label="State">
+                        <option selected>Seleccionar</option>
+                        {% for f in financiamiento  %}
+                            <option value="{{f.id}}">{{f.tipo_solicitud}}</option>
+                        {% endfor %}
+                        
+                       
+                      </select>
+                      <label for="inputFirstName">Financiamiento</label>
+                    </div>
+                  </div>             
+                 
+              
+                  <div class="card-footer text-center py-3" style="margin-top:2em">
+                    <button type="submit" style="background: #1558c3;" class="btn btn-primary">Guardar</button>
+                  </div>
+          </form>
+      </div>
+      
+  </div>
+  </div>
+</main>
+   
+
+
+
+{% endblock container %}
+
+
+
